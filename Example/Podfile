@@ -1,0 +1,23 @@
+platform :ios, '11.0'
+use_frameworks!
+
+def shared_pods
+  pod 'DcMVVM/RxSwift', :path => '../'
+  pod 'DcMVVM/ReactiveSwift', :path => '../'
+  pod 'DcMVVM/Combine', :path => '../'
+  pod 'DcMVVM/UIKit', :path => '../'
+end
+
+target 'DcMVVM_Example' do
+  pod 'RxSwift', '~> 5'
+  pod 'RxCocoa', '~> 5'
+  pod 'RxDataSources'
+  shared_pods
+
+  target 'DcMVVM_Tests' do
+    inherit! :search_paths
+    
+    pod 'DcMVVMTest', :path => '../'
+    shared_pods
+  end
+end

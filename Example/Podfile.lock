@@ -1,0 +1,67 @@
+PODS:
+  - DcMVVM/Combine (0.1.0):
+    - DcMVVM/Core
+  - DcMVVM/Core (0.1.0)
+  - DcMVVM/ReactiveSwift (0.1.0):
+    - DcMVVM/Core
+    - ReactiveSwift (~> 6)
+  - DcMVVM/RxSwift (0.1.0):
+    - DcMVVM/Core
+    - RxSwift (~> 5)
+  - DcMVVM/UIKit (0.1.0):
+    - DcMVVM/Core
+  - DcMVVMTest (0.1.0):
+    - DcMVVMTest/Core (= 0.1.0)
+  - DcMVVMTest/Core (0.1.0):
+    - DcMVVM/Core
+  - Differentiator (4.0.1)
+  - ReactiveSwift (6.2.1)
+  - RxCocoa (5.0.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.0.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.0.1)
+
+DEPENDENCIES:
+  - DcMVVM/Combine (from `../`)
+  - DcMVVM/ReactiveSwift (from `../`)
+  - DcMVVM/RxSwift (from `../`)
+  - DcMVVM/UIKit (from `../`)
+  - DcMVVMTest (from `../`)
+  - RxCocoa (~> 5)
+  - RxDataSources
+  - RxSwift (~> 5)
+
+SPEC REPOS:
+  trunk:
+    - Differentiator
+    - ReactiveSwift
+    - RxCocoa
+    - RxDataSources
+    - RxRelay
+    - RxSwift
+
+EXTERNAL SOURCES:
+  DcMVVM:
+    :path: "../"
+  DcMVVMTest:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  DcMVVM: 29af605e175d9c2b4315649ede6cfea384a3e730
+  DcMVVMTest: cc0743c8a6315bd072a04bb4c7f6f792c3087f83
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  ReactiveSwift: 07ddf579f4eb3ee3bd656214f0461aaf2c0fd639
+  RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
+  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
+
+PODFILE CHECKSUM: 8bcdc1c5e1f2494544bb4b6e75436bc15093eea3
+
+COCOAPODS: 1.9.1
