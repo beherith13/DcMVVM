@@ -11,23 +11,24 @@ import DcMVVM
 
 struct SecondCoordinator: CoordinatorType {
     typealias View = SecondViewController
+    static let defaultFactories = factories(with: View.storyboardFactory())
 
     struct Context {
         let navigationController: UINavigationController
         var animated = true
     }
-
-    static let defaultFactories = factories(with: View.storyboardFactory())
-
-    static func bind(events: Events, with context: Context) -> [Terminatable] {
-        [ events.didClose.emit(onNext: wrap(close(with:), with: context)) ]
-    }
     
-    static func navigate(to view: SecondViewController, with context: Context) {
+    let context: Context
+
+    func navigate(to view: SecondViewController) {
         context.navigationController.pushViewController(view, animated: context.animated)
     }
     
-    private static func close(with context: Context) -> Void {
+    func bind(events: Events) -> [Terminatable] {
+        [ events.didClose.emit(onNext: close) ]
+    }
+    
+    private func close() -> Void {
         context.navigationController.popViewController(animated: context.animated)
     }
 }

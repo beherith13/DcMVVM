@@ -14,17 +14,21 @@ public protocol CoordinatorType: ViewBuilderType {
     typealias Instance = CoordinatorInstance<Self>
     typealias Factory = CoordinatorFactory<Self>
     
-    static func bind(events: Events, with context: Context) -> [Terminatable]
-    static func navigate(to view: View, with context: Context)
+    init(context: Context)
+    
+    func bind(events: Events) -> [Terminatable]
+    func navigate(to view: View)
 }
 
 public extension CoordinatorType {
     static func instance(with context: Context, dependencies: Dependencies, factories: FactoryPair) -> Instance {
         return Instance { params in
+            let coordinator = Self(context: context)
+            
             let instance = view(with: params, dependencies: dependencies, factories: factories) { events in
-                return bind(events: events, with: context)
+                return coordinator.bind(events: events)
             }
-            navigate(to: instance, with: context)
+            coordinator.navigate(to: instance)
         }
     }
     
@@ -34,11 +38,5 @@ public extension CoordinatorType {
     
     static func factory() -> Factory {
         return Factory(handler: instance)
-    }
-
-    static func wrap<T>(_ handler: @escaping (T, Context) -> Void, with context: Context) -> (T) -> Void {
-        return {
-            handler($0, context)
-        }
     }
 }

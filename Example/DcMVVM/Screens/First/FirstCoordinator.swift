@@ -12,6 +12,7 @@ import RxSwift
 
 struct FirstCoordinator: CoordinatorType {
     typealias View = FirstViewController
+    static let defaultFactories = factories(with: View.storyboardFactory(from: "FirstStoryboard"))
 
     struct Context {
         let navigationController: UINavigationController
@@ -21,17 +22,17 @@ struct FirstCoordinator: CoordinatorType {
         var animated = true
     }
         
-    static let defaultFactories = factories(with: View.storyboardFactory(from: "FirstStoryboard"))
-    
-    static func navigate(to view: FirstViewController, with context: Context) {
+    let context: Context
+
+    func navigate(to view: FirstViewController) {
         context.navigationController.pushViewController(view, animated: context.animated)
     }
     
-    static func bind(events: Events, with context: Context) -> [Terminatable] {
-        [ events.didOpen.emit(onNext: wrap(open(item:with:), with: context)) ]
+    func bind(events: Events) -> [Terminatable] {
+        [ events.didOpen.emit(onNext: open(item:)) ]
     }
     
-    private static func open(item: FirstModel, with context: Context) {
+    private func open(item: FirstModel) {
         let coordinator = context.secondCoordinator.instance(
             with: SecondCoordinator.Context(
                 navigationController: context.navigationController

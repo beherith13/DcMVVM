@@ -9,10 +9,6 @@
 import Foundation
 
 public extension CoordinatorType {
-    static func wrap(_ handler: @escaping (Context) -> Void, with context: Context) -> () -> Void {
-        return {
-            handler(context)
-        }
-    }
+
 }
 
