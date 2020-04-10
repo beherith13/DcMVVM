@@ -10,7 +10,8 @@ import DcMVVM
 
 public class CoordinatorMock<T: CoordinatorType> {
     public var initCalled: (context: T.Context, dependencies: T.Dependencies)?
-    public var startCalled: T.Params?
+    public var startParams: T.Params?
+    public var startCompletion: T.Completion?
 
     fileprivate init() { }
     
@@ -20,7 +21,8 @@ public class CoordinatorMock<T: CoordinatorType> {
                 self.initCalled = ($0, $1)
             },
             start: {
-                self.startCalled = $0
+                self.startParams = $0
+                self.startCompletion = $1
             }
         )
     }

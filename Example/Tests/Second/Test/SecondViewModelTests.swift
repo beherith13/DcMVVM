@@ -15,7 +15,7 @@ import DcMVVMTest
 
 class SecondViewModelTests: XCTestCase {
     let dependenciesMock = SecondViewModelMock.Dependencies()
-    let eventDidOpen = BehaviorRelay<Void?>(value: nil)
+    let eventDidOpen = BehaviorRelay<FirstModel?>(value: nil)
     let inputClose = PublishRelay<Void>()
     let outputButtonTitle = BehaviorRelay<String?>(value: nil)
     let outputTitle = BehaviorRelay<String?>(value: nil)

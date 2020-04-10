@@ -9,14 +9,14 @@
 import Foundation
 
 public struct CoordinatorInstance<T: CoordinatorType> {
-    public typealias Handler = (T.Params) -> Void
+    public typealias Handler = (T.Params, @escaping T.Completion) -> Void
     private let handler: Handler
     
     public init(handler: @escaping Handler) {
         self.handler = handler
     }
 
-    public func start(with params: T.Params) {
-        handler(params)
+    public func start(with params: T.Params, completion: @escaping T.Completion) {
+        handler(params, completion)
     }
 }

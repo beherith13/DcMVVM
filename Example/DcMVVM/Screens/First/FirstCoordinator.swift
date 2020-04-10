@@ -12,6 +12,7 @@ import RxSwift
 
 struct FirstCoordinator: CoordinatorType {
     typealias View = FirstViewController
+    typealias Result = Void
     static let defaultFactories = factories(with: View.storyboardFactory(from: "FirstStoryboard"))
 
     struct Context {
@@ -28,8 +29,8 @@ struct FirstCoordinator: CoordinatorType {
         context.navigationController.pushViewController(view, animated: context.animated)
     }
     
-    func bind(events: Events) -> [Terminatable] {
-        [ events.didOpen.emit(onNext: open(item:)) ]
+    func bind(events: Events, completion: @escaping Completion) -> [Terminatable] {
+        [ events.didOpen.emit(onNext: open) ]
     }
     
     private func open(item: FirstModel) {
@@ -42,6 +43,8 @@ struct FirstCoordinator: CoordinatorType {
             )
         )
         
-        coordinator.start(with: item)
+        coordinator.start(with: item) { result in
+            print("Flow complete with \(result.id)")
+        }
     }
 }

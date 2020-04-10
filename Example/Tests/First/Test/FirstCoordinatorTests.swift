@@ -17,6 +17,8 @@ class FirstCoordinatorTests: XCTestCase {
     let viewModelMock = FirstViewModelMock.Factory()
     let dependenciesMock = FirstViewModelMock.Dependencies()
     let secondCoordinatorMock = SecondCoordinator.mock()
+    let modelStub = FirstModel(id: 1, title: "test")
+
     var navigationController: UINavigationController!
     var sut: FirstCoordinator.Instance!
     
@@ -51,20 +53,26 @@ class FirstCoordinatorTests: XCTestCase {
     }
     
     func testNavigation() {
-        sut.start(with: ())
+        sut.start()
         
         XCTAssertEqual(navigationController.viewControllers.count, 1)
         XCTAssertTrue(navigationController.viewControllers.last is FirstViewController)
     }
     
     func testOpenEvent() {
-        let testModel = FirstModel(id: 1, title: "test")
-        sut.start(with: ())
-        viewModelMock.eventDidOpen.accept(testModel)
+        sut.start()
+        viewModelMock.eventDidOpen.accept(modelStub)
         
         XCTAssertEqual(secondCoordinatorMock.initCalled?.context.navigationController, navigationController)
         XCTAssertTrue(secondCoordinatorMock.initCalled?.dependencies.userDefaults is UserDefaultsMock)
-        XCTAssertEqual(secondCoordinatorMock.startCalled, testModel)
+        XCTAssertEqual(secondCoordinatorMock.startParams, modelStub)
     }
 
+    func testSecondCoordinatorCompletion() {
+        sut.start()
+        viewModelMock.eventDidOpen.accept(modelStub)
+        secondCoordinatorMock.startCompletion?(modelStub)
+        
+        // TODO: Add third coordinator to example and test its start on completion
+    }
 }

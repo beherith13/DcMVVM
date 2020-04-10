@@ -12,13 +12,13 @@ public extension CoordinatorType {
 
     static func mockFactory(
         instantiate: @escaping (Context, Dependencies) -> Void,
-        start: @escaping (Params) -> Void
+        start: @escaping (Params, @escaping Completion) -> Void
     ) -> Factory {
         return Factory { context, dependencies in
             instantiate(context, dependencies)
             
-            return CoordinatorInstance { params in
-                start(params)
+            return CoordinatorInstance { params, completion in
+                start(params, completion)
             }
         }
     }

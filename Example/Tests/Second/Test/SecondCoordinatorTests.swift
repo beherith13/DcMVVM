@@ -16,6 +16,7 @@ import DcMVVMTest
 class SecondCoordinatorTests: XCTestCase {
     let viewModelMock = SecondViewModelMock.Factory()
     let dependenciesMock = SecondViewModelMock.Dependencies()
+    let modelStub = FirstModel(id: 1, title: "title")
     
     var navigationController: UINavigationController!
     var sut: SecondCoordinator.Instance!
@@ -49,16 +50,24 @@ class SecondCoordinatorTests: XCTestCase {
     }
     
     func testNavigation() {
-        sut.start(with: FirstModel(id: 1, title: "title"))
+        sut.start(with: modelStub) { _ in }
         
         XCTAssertEqual(navigationController.viewControllers.count, 2)
         XCTAssertTrue(navigationController.viewControllers.last is SecondViewController)
     }
     
     func testClose() {
-        sut.start(with: FirstModel(id: 1, title: "title"))
-        viewModelMock.didClose.accept(())
+        sut.start(with: modelStub) { _ in }
+        viewModelMock.didClose.accept(modelStub)
 
         XCTAssertEqual(navigationController.viewControllers.count, 1)
+    }
+
+    func testCompletion() {
+        var result: SecondCoordinator.Result?
+        sut.start(with: modelStub) { result = $0 }
+        viewModelMock.didClose.accept(modelStub)
+
+        XCTAssertEqual(result, modelStub)
     }
 }

@@ -35,7 +35,7 @@ enum SecondViewModelMock: ViewModelMockType {
         typealias ViewModel = SecondViewModel
         
         let disposeBag = DisposeBag()
-        let didClose = PublishRelay<Void>()
+        let didClose = PublishRelay<FirstModel>()
 
         func events(with params: FirstModel) -> ViewModel.Events {
             ViewModel.Events(didClose: didClose.asSignal())

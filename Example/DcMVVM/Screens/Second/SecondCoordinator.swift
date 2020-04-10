@@ -8,9 +8,12 @@
 
 import Foundation
 import DcMVVM
+import RxSwift
+import RxCocoa
 
 struct SecondCoordinator: CoordinatorType {
     typealias View = SecondViewController
+    typealias Result = FirstModel
     static let defaultFactories = factories(with: View.storyboardFactory())
 
     struct Context {
@@ -24,11 +27,13 @@ struct SecondCoordinator: CoordinatorType {
         context.navigationController.pushViewController(view, animated: context.animated)
     }
     
-    func bind(events: Events) -> [Terminatable] {
-        [ events.didClose.emit(onNext: close) ]
+    func bind(events: Events, completion: @escaping Completion) -> [Terminatable] {
+        return [
+            events.didClose.do(onNext: close).emit(onNext: completion)
+        ]
     }
     
-    private func close() -> Void {
+    private func close(item: FirstModel) -> Void {
         context.navigationController.popViewController(animated: context.animated)
     }
 }

@@ -8,8 +8,20 @@
 
 import Foundation
 
-public extension CoordinatorInstance where T.Params == Void {
+public extension CoordinatorInstance where T.Params == Void, T.Result == Void {
     func start() {
-        start(with: ())
+        start(with: (), completion: { })
+    }
+}
+
+public extension CoordinatorInstance where T.Params == Void {
+    func start(completion: @escaping T.Completion) {
+        start(with: (), completion: completion)
+    }
+}
+
+public extension CoordinatorInstance where T.Result == Void {
+    func start(with params: T.Params) {
+        start(with: params, completion: { })
     }
 }

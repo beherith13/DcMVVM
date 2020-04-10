@@ -29,7 +29,7 @@ struct SecondViewModel: RxViewModelType {
     }
     
     struct Events {
-        let didClose: Signal<Void>
+        let didClose: Signal<FirstModel>
     }
 
     static func bind(params item: FirstModel, dependencies: Dependencies, input: Input) -> (Output, Events) {
@@ -37,7 +37,10 @@ struct SecondViewModel: RxViewModelType {
         let description: Driver<String> = .just("Title is \(item.title)")
         let buttonTitle: Driver<String> = .just("Close")
         
-        let didClose = input.close.asSignal(onErrorJustReturn: ())
+        let didClose = input
+            .close
+            .map { item }
+            .asSignal(onErrorJustReturn: item)
         
         return (
             Output(
