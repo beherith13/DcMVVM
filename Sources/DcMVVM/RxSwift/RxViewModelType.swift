@@ -7,5 +7,6 @@
 //
 
 import RxSwift
+import DcMVVM
 
 public protocol RxViewModelType: ViewModelType where Terminatable == Disposable { }

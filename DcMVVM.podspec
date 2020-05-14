@@ -30,29 +30,29 @@ Declarative MVVM-C pattern for Swift optimized to be used in couple with reactiv
   s.swift_version = '5.0'
 
   s.subspec "Core" do |sb|
-    sb.source_files = "DcMVVM/Core/**/*.swift"
+    sb.source_files = "Sources/DcMVVM/Core/**/*.swift"
   end
   
   s.subspec "UIKit" do |sb|
     sb.dependency 'DcMVVM/Core'
-    sb.source_files = "DcMVVM/UIKit/*.swift"
+    sb.source_files = "Sources/DcMVVM/UIKit/*.swift"
   end
   
   s.subspec "RxSwift" do |sb|
     sb.dependency 'DcMVVM/Core'
     sb.dependency 'RxSwift', '~> 5'
-    sb.source_files = "DcMVVM/Rx/*.swift"
+    sb.source_files = "Sources/DcMVVM/RxSwift/*.swift"
   end
   
   s.subspec "ReactiveSwift" do |sb|
     sb.dependency 'DcMVVM/Core'
     sb.dependency 'ReactiveSwift', '~> 6'
-    sb.source_files = "DcMVVM/ReactiveSwift/*.swift"
+    sb.source_files = "Sources/DcMVVM/ReactiveSwift/*.swift"
   end
   
   s.subspec "Combine" do |sb|
     sb.dependency 'DcMVVM/Core'
-    sb.source_files = "DcMVVM/Combine/*.swift"
+    sb.source_files = "Sources/DcMVVM/Combine/*.swift"
   end
 
   s.default_subspecs = 'Core'

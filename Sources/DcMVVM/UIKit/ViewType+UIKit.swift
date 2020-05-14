@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DcMVVM
 
 public extension ViewType where Self: UIViewController {
     static func instance() -> Instance {

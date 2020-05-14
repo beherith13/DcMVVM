@@ -31,7 +31,7 @@ Set of protocols, extensions and mocks which help to test MVVM components if DcM
 
   s.subspec "Core" do |sb|
     sb.dependency 'DcMVVM/Core'
-    sb.source_files = "DcMVVMTest/Core/**/*.swift"
+    sb.source_files = "Sources/DcMVVMTest/Core/**/*.swift"
   end
 
   s.default_subspecs = 'Core'
