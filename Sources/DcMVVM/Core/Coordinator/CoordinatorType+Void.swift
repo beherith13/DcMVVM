@@ -8,7 +8,14 @@
 
 import Foundation
 
-public extension CoordinatorType {
+public extension CoordinatorType where Dependencies == Void {
+    static func instance(with context: Context, factories: FactoryPair) -> Instance {
+        return instance(with: context, dependencies: (), factories: factories)
+    }
+    
+    static func instance(with context: Context) -> Instance {
+        return instance(with: context, dependencies: ())
+    }
 
 }
 
